@@ -2,13 +2,13 @@
   "uuid": "6ec90589-c310-40c4-97bd-67ed39feb449",
   "shortName": "ALittleLess",
   "longName": "ALittleLess",
-  "companyName": "MakeAwesomeHappen",
+  "companyName": "Chris Lewicki",
   "versionCode": 1,
   "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": ["aplite", "basalt"],
   "watchapp": {
-    "watchface": false
+    "watchface": true
   },
   "appKeys": {
     "dummy": 0
