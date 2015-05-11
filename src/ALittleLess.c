@@ -2,6 +2,8 @@
  * This work is licensed under the MIT license
  * but please don't sell it :( */
 
+/* TODO: --Fix battery_peek so that battery status is loaded on init rather than just on battery state change */
+
 #include <pebble.h>
 
 static Window *s_MainWindow;
@@ -10,7 +12,7 @@ static TextLayer *s_DateLayer;
 static TextLayer *s_DayLayer;
 static TextLayer *s_BlackLayer;
 static TextLayer *batteryLayer;
-// static char s_batteryBuffer[16]
+// static char s_batteryBuffer[16] /* I don't know if this is supposed to go here */
 
 static void update_time() {
   // Get a tm structure
@@ -47,15 +49,15 @@ static void update_date(){
 }
 
 //BatteryChargeState charge_state = battery_state_service_peek();
-static void battery_handler(BatteryChargeState charge_state) {
+static void battery_handler(BatteryChargeState charge_state){
       static char s_battery_buffer[16];
 
         if (charge_state.is_charging) {
-                snprintf(s_battery_buffer, sizeof(s_battery_buffer), "charging");
+                snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%++", charge_state.charge_percent);
                   } else {
-                          snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%% charged", charge_state.charge_percent);
+                          snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", charge_state.charge_percent);
                             }
-          text_layer_set_text(battery_layer, s_battery_buffer);
+          text_layer_set_text(batteryLayer, s_battery_buffer);
 }
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
@@ -70,7 +72,7 @@ static void mainWindowLoad(Window *window) {
 	layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_BlackLayer));
 	
 	// creates a white layer over s_BlackLayer to create the pattern, as well as display the time
-	s_TimeLayer = text_layer_create(GRect(0,60,144,50));
+    s_TimeLayer = text_layer_create(GRect(0,60,144,50));
 	text_layer_set_background_color(s_TimeLayer, GColorWhite);
 	text_layer_set_text_color(s_TimeLayer, GColorBlack);
 	
@@ -111,7 +113,7 @@ static void mainWindowLoad(Window *window) {
     layer_add_child(window_get_root_layer(window), text_layer_get_layer(batteryLayer));
     update_time();
     update_date();
-    battery_handler();
+    battery_state_service_peek();
 }
 
 static void mainWindowUnload(Window *window){
@@ -130,6 +132,7 @@ static void init() {
 		.unload = mainWindowUnload
 	});
 	
+    battery_state_service_peek();
 	window_stack_push(s_MainWindow, true);
 }
 
