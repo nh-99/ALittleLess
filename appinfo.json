@@ -1,19 +1,26 @@
 {
-  "uuid": "6ec90589-c310-40c4-97bd-67ed39feb449",
-  "shortName": "ALittleLess",
-  "longName": "ALittleLess",
-  "companyName": "Chris Lewicki",
-  "versionCode": 1,
-  "versionLabel": "1.0",
-  "sdkVersion": "3",
-  "targetPlatforms": ["aplite", "basalt"],
-  "watchapp": {
-    "watchface": true
-  },
-  "appKeys": {
-    "dummy": 0
-  },
-  "resources": {
-    "media": []
-  }
+    "appKeys": {
+        "dummy": 0
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "Chris Lewicki",
+    "longName": "ALittleLess",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "ALittleLess",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "6ec90589-c310-40c4-97bd-67ed39feb449",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
 }
